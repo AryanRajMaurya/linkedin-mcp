@@ -122,6 +122,14 @@ linkedin-mcp --http     # streamable HTTP, for a shared server
 | `LINKEDIN_ENGINE_PROFILE` | `content/profile.json` | The written profile to diff against |
 | `LINKEDIN_ENGINE_VISIBILITY` | `PUBLIC` | The default visibility for a post |
 
+## See also
+
+- [`linkedin-engine`](https://github.com/AryanRajMaurya/linkedin-engine) — the
+  command line tool this server is built on. Same credential store, same
+  quality gate, plus draft generation from your GitHub activity.
+- [`shipfree`](https://github.com/AryanRajMaurya/shipfree) — the Agent Skill
+  for deploying AI services on free tiers.
+
 ## Development
 
 ```bash
