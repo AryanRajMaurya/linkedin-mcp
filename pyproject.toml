@@ -1,0 +1,71 @@
+[project]
+name = "linkedin-mcp"
+version = "0.1.0"
+description = "A Model Context Protocol server for LinkedIn, with a quality gate that refuses posts which read as generated."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Aryan Raj Maurya" }]
+keywords = [
+  "mcp",
+  "model-context-protocol",
+  "linkedin",
+  "automation",
+  "developer-tools",
+  "agent-skill",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Communications",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+  "mcp>=2.0",
+  "linkedin-engine @ git+https://github.com/AryanRajMaurya/linkedin-engine.git",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6", "mypy>=1.11"]
+
+[project.scripts]
+linkedin-mcp = "linkedin_mcp.server:main"
+
+[project.urls]
+Homepage = "https://github.com/AryanRajMaurya/linkedin-mcp"
+Repository = "https://github.com/AryanRajMaurya/linkedin-mcp"
+Issues = "https://github.com/AryanRajMaurya/linkedin-mcp/issues"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+extend-exclude = ["*.md"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "NPY", "S"]
+ignore = ["E501", "S101"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101", "S105", "S106"]
+
+[tool.mypy]
+python_version = "3.11"
+packages = ["linkedin_mcp"]
+mypy_path = "src"
+warn_unused_configs = true
+ignore_missing_imports = true

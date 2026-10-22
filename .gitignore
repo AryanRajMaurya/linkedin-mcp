@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+
+# Credentials never live in the repository, but ignore them anyway.
+.env
+.env.*
+!.env.example
+token.json
+config.json
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
