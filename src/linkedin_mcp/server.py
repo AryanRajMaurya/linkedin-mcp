@@ -234,12 +234,18 @@ def build_server() -> Any:
         if dry_run:
             # A dry run needs no token. It answers the only question that
             # matters here -- would this post go out -- without needing the
-            # application to be authorised first.
+            # application to be authorised first. Say why it was a dry run:
+            # a caller who asked for one is not a server with writes off.
+            enabled = publishing_enabled()
             return {
                 "ok": True,
                 "published": False,
                 "post_id": "",
-                "reason": ("dry run; publishing is disabled on this server, so nothing was sent"),
+                "reason": (
+                    "dry run; nothing was sent"
+                    if enabled
+                    else "dry run; publishing is disabled on this server, so nothing was sent"
+                ),
                 "summary": summarise(findings),
                 "findings": [
                     {

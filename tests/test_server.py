@@ -140,6 +140,17 @@ def test_publishing_is_a_dry_run_when_it_is_not_enabled(monkeypatch, tmp_path) -
     assert "dry run" in result["reason"]
 
 
+def test_a_requested_dry_run_does_not_claim_publishing_is_disabled(monkeypatch, tmp_path) -> None:
+    """Publishing on + dry_run=True is a deliberate preview, not a locked server."""
+    monkeypatch.setenv(PUBLISH_FLAG, "1")
+    monkeypatch.setenv("LINKEDIN_ENGINE_HOME", str(tmp_path))
+    result = payload(call("linkedin_publish_post", {"text": A_GOOD_POST, "dry_run": True}))
+    assert result["published"] is False
+    assert result["ok"] is True
+    assert "dry run" in result["reason"]
+    assert "disabled" not in result["reason"]
+
+
 def test_an_unknown_visibility_is_refused() -> None:
     result = payload(call("linkedin_publish_post", {"text": A_GOOD_POST, "visibility": "sideways"}))
     assert result["ok"] is False
